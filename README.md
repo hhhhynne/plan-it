@@ -8,6 +8,9 @@ This skeleton app is set up with Vercel's AI SDK. It'll provide you with a good 
 2. Install dependencies: `pnpm install`
 3. Run the app: `pnpm dev`
 
+## About the app
+NextJS + Vercel AI SDK + Shadcn + Tailwind
+
 ---
 
 ## Resources
