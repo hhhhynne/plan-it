@@ -11,6 +11,15 @@ This skeleton app is set up with Vercel's AI SDK. It'll provide you with a good 
 ## About the app
 NextJS + Vercel AI SDK + Shadcn + Tailwind
 
+
+## How to run Flowise?
+Flowise is a visual, drag-n-drop AI-chain editor - really good to iterate on chain design.
+
+![Flowise](public/images/flowise.png)
+
+- `docker compose up`
+- Open `localhost:3010`
+
 ---
 
 ## Resources
