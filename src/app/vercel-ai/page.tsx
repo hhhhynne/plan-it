@@ -8,9 +8,9 @@ const apiRoutes = {
   rag: "/api/chat-v3",
 } as const;
 
-export default function Chat() {
+export default function VercelAIChat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: apiRoutes.rag, // Toggle between the basic implementation and the one with tools
+    api: apiRoutes.basic, // Toggle between the basic implementation and the one with tools
     maxSteps: 10,
   });
 

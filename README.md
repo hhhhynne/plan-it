@@ -35,5 +35,7 @@ Here are some relevant resources that you can choose to leverage
 - Excalidraw
 - Relume
 
-### Idea generation
+### Idea / App generation
 - v0
+- Lovable
+- Data Button
