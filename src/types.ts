@@ -1,7 +1,7 @@
 export interface TripPreference {
   userId: string;
   location: string;
-  budget: 'budget' | 'moderate' | 'luxury';
+  budget: "budget" | "moderate" | "luxury";
   interests: string[];
   dates: {
     start: string;
@@ -12,6 +12,9 @@ export interface TripPreference {
   dietaryRestrictions?: string[];
   accommodationType?: string;
   mustSeeAttractions?: string;
+  sessionId: string;
+  memberName: string;
+  submittedAt?: string;
 }
 
 export interface TripPlan {
@@ -24,4 +27,14 @@ export interface TripPlan {
     day: number;
     activities: string[];
   }>;
+}
+
+export interface TripSession {
+  id: string;
+  name: string;
+  createdAt: string;
+  groupSize: number;
+  preferences: TripPreference[];
+  status: "collecting" | "planning" | "completed";
+  plan?: TripPlan;
 }
