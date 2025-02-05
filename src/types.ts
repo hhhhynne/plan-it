@@ -9,7 +9,6 @@ export interface TripPreference {
   };
   travelStyle?: string;
   pacePreference?: string;
-  dietaryRestrictions?: string[];
   accommodationType?: string;
   mustSeeAttractions?: string;
   sessionId: string;

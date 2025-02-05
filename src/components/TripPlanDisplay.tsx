@@ -1,6 +1,5 @@
-import React from 'react';
-import { Calendar, MapPin, DollarSign, Hotel, Car, Utensils } from 'lucide-react';
-import type { TripPlan } from '../types';
+import { Calendar, MapPin, DollarSign, Hotel, Car } from "lucide-react";
+import type { TripPlan } from "../types";
 
 interface TripPlanDisplayProps {
   plan: TripPlan;
@@ -54,7 +53,9 @@ export function TripPlanDisplay({ plan }: TripPlanDisplayProps) {
                 <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-blue-600 to-purple-600" />
                 <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 ring-4 ring-white" />
                 <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <h4 className="font-semibold text-lg text-gray-900 mb-4">Day {day.day}</h4>
+                  <h4 className="font-semibold text-lg text-gray-900 mb-4">
+                    Day {day.day}
+                  </h4>
                   <ul className="space-y-4">
                     {day.activities.map((activity, index) => (
                       <li key={index} className="flex items-start space-x-3">
