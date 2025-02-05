@@ -46,10 +46,16 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-2 bg-blue-600 rounded-full mb-6 animate-pulse">
-            <Plane className="h-12 w-12 text-white transform -rotate-45" />
+          <div className="inline-flex items-center justify-center p-2 rounded-full mb-6 ">
+
+            
+            <img 
+    src="/Planit.svg" 
+    alt="Plane icon" 
+    className="h-[170px] w-[170px] text-white transform -rotate-45"
+  />
           </div>
-          <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
+          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
             Group Trip Planner
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
