@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Sparkles, PlusCircle, X, Plane } from 'lucide-react';
+import { Sparkles, PlusCircle, X, Plane } from 'lucide-react';
 import { PreferenceForm } from './components/PreferenceForm';
 import { TripPlanDisplay } from './components/TripPlanDisplay';
 import type { TripPreference, TripPlan } from './types';
