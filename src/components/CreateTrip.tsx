@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Plane } from "lucide-react";
 import { mockApi } from "../lib/mockApi";
 
 export function CreateTrip() {
@@ -28,10 +27,16 @@ export function CreateTrip() {
   return (
     <div className="max-w-md mx-auto">
       <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center p-2 bg-blue-600 rounded-full mb-6">
-          <Plane className="h-12 w-12 text-white transform -rotate-45" />
+      <div className="inline-flex items-center justify-center p-2 rounded-full mb-6 ">
+
+            
+<img 
+src="/Planit.svg" 
+alt="Plane icon" 
+className="h-[170px] w-[170px] text-white transform -rotate-45"
+/>
         </div>
-        <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
+        <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
           Group Trip Planner
         </h1>
       </div>
