@@ -1,6 +1,17 @@
-import React from 'react';
-import { PlaneTakeoff, DollarSign, Heart, Calendar, Clock, Users } from 'lucide-react';
-import type { TripPreference } from '../types';
+import React from "react";
+import { PlaneTakeoff, Heart, Calendar } from "lucide-react";
+import type { TripPreference } from "../types";
+import { Input } from "./ui/input";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "./ui/textarea";
 
 interface PreferenceFormProps {
   onSubmit: (preferences: TripPreference) => void;
@@ -8,21 +19,23 @@ interface PreferenceFormProps {
 }
 
 export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
-  const [preferences, setPreferences] = React.useState<TripPreference>(() => initialData || {
-    userId: crypto.randomUUID(),
-    location: '',
-    budget: 'moderate',
-    interests: [],
-    dates: {
-      start: '',
-      end: ''
-    },
-    travelStyle: 'balanced',
-    pacePreference: 'moderate',
-    dietaryRestrictions: [],
-    accommodationType: 'hotel',
-    mustSeeAttractions: ''
-  });
+  const [preferences, setPreferences] = React.useState<TripPreference>(
+    () =>
+      initialData || {
+        userId: crypto.randomUUID(),
+        location: "",
+        budget: "moderate",
+        interests: [],
+        dates: {
+          start: "",
+          end: "",
+        },
+        travelStyle: "balanced",
+        pacePreference: "moderate",
+        accommodationType: "hotel",
+        mustSeeAttractions: "",
+      }
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,13 +52,15 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
             <PlaneTakeoff className="h-5 w-5 text-gray-400" />
           </div>
-          <input
+          <Input
             type="text"
             required
-            className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="pl-10 px-8 block w-full rounded-md border-gray-300 shadow-sm focus:!ring-blue-500"
             placeholder="e.g., Europe, Southeast Asia"
             value={preferences.location}
-            onChange={(e) => setPreferences({ ...preferences, location: e.target.value })}
+            onChange={(e) =>
+              setPreferences({ ...preferences, location: e.target.value })
+            }
           />
         </div>
       </div>
@@ -56,18 +71,26 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
             Budget Range
           </label>
           <div className="mt-1 relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <DollarSign className="h-5 w-5 text-gray-400" />
-            </div>
-            <select
-              className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            <Select
               value={preferences.budget}
-              onChange={(e) => setPreferences({ ...preferences, budget: e.target.value as TripPreference['budget'] })}
+              onValueChange={(value) =>
+                setPreferences({
+                  ...preferences,
+                  budget: value as TripPreference["budget"],
+                })
+              }
             >
-              <option value="budget">Budget</option>
-              <option value="moderate">Moderate</option>
-              <option value="luxury">Luxury</option>
-            </select>
+              <SelectTrigger className="p-5">
+                <SelectValue placeholder="Select a budget" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="budget">Budget</SelectItem>
+                  <SelectItem value="moderate">Moderate</SelectItem>
+                  <SelectItem value="luxury">Luxury</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
@@ -76,20 +99,28 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
             Travel Style
           </label>
           <div className="mt-1 relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <Users className="h-5 w-5 text-gray-400" />
-            </div>
-            <select
-              className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            <Select
               value={preferences.travelStyle}
-              onChange={(e) => setPreferences({ ...preferences, travelStyle: e.target.value })}
+              onValueChange={(value) =>
+                setPreferences({
+                  ...preferences,
+                  travelStyle: value as TripPreference["travelStyle"],
+                })
+              }
             >
-              <option value="luxury">Luxury</option>
-              <option value="balanced">Balanced</option>
-              <option value="backpacker">Backpacker</option>
-              <option value="adventure">Adventure</option>
-              <option value="cultural">Cultural Immersion</option>
-            </select>
+              <SelectTrigger className="p-5">
+                <SelectValue placeholder="Select a travel style" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="luxury">Luxury</SelectItem>
+                  <SelectItem value="balanced">Balanced</SelectItem>
+                  <SelectItem value="backpacker">Backpacker</SelectItem>
+                  <SelectItem value="adventure">Adventure</SelectItem>
+                  <SelectItem value="cultural">Cultural</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </div>
@@ -104,10 +135,13 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
           </div>
           <select
             multiple
-            className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 min-h-[120px]"
+            className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:!ring-blue-500 min-h-[120px]"
             value={preferences.interests}
             onChange={(e) => {
-              const values = Array.from(e.target.selectedOptions, option => option.value);
+              const values = Array.from(
+                e.target.selectedOptions,
+                (option) => option.value
+              );
               setPreferences({ ...preferences, interests: values });
             }}
           >
@@ -132,18 +166,29 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
           Accommodation Preference
         </label>
         <div className="mt-1 relative rounded-md shadow-sm">
-          <select
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          <Select
             value={preferences.accommodationType}
-            onChange={(e) => setPreferences({ ...preferences, accommodationType: e.target.value })}
+            onValueChange={(value) =>
+              setPreferences({
+                ...preferences,
+                accommodationType: value as TripPreference["accommodationType"],
+              })
+            }
           >
-            <option value="hotel">Hotel</option>
-            <option value="resort">Resort</option>
-            <option value="apartment">Apartment/Vacation Rental</option>
-            <option value="hostel">Hostel</option>
-            <option value="boutique">Boutique Hotel</option>
-            <option value="camping">Camping/Glamping</option>
-          </select>
+            <SelectTrigger className="p-5">
+              <SelectValue placeholder="Select an accomodation preference" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="hotel">Hotel</SelectItem>
+                <SelectItem value="resort">Resort</SelectItem>
+                <SelectItem value="apartment">Apartment</SelectItem>
+                <SelectItem value="hostel">Hostel</SelectItem>
+                <SelectItem value="boutique">Boutique</SelectItem>
+                <SelectItem value="camping">Camping</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -152,43 +197,32 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
           Trip Pace
         </label>
         <div className="mt-1 relative rounded-md shadow-sm">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-            <Clock className="h-5 w-5 text-gray-400" />
-          </div>
-          <select
-            className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          <Select
             value={preferences.pacePreference}
-            onChange={(e) => setPreferences({ ...preferences, pacePreference: e.target.value })}
+            onValueChange={(value) =>
+              setPreferences({
+                ...preferences,
+                pacePreference: value as TripPreference["pacePreference"],
+              })
+            }
           >
-            <option value="relaxed">Relaxed - Plenty of free time</option>
-            <option value="moderate">Moderate - Balanced schedule</option>
-            <option value="busy">Busy - Pack in the activities</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Dietary Restrictions
-        </label>
-        <div className="mt-1 relative rounded-md shadow-sm">
-          <select
-            multiple
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 min-h-[100px]"
-            value={preferences.dietaryRestrictions}
-            onChange={(e) => {
-              const values = Array.from(e.target.selectedOptions, option => option.value);
-              setPreferences({ ...preferences, dietaryRestrictions: values });
-            }}
-          >
-            <option value="none">None</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="vegan">Vegan</option>
-            <option value="glutenFree">Gluten-free</option>
-            <option value="dairyFree">Dairy-free</option>
-            <option value="kosher">Kosher</option>
-            <option value="halal">Halal</option>
-          </select>
+            <SelectTrigger className="pl-5">
+              <SelectValue placeholder="Select a pace preference" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="relaxed">
+                  Relaxed - Plenty of free time
+                </SelectItem>
+                <SelectItem value="moderate">
+                  Moderate - Balanced schedule
+                </SelectItem>
+                <SelectItem value="busy">
+                  Busy - Pack in the activities
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -197,12 +231,17 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
           Must-See Attractions/Activities
         </label>
         <div className="mt-1">
-          <textarea
+          <Textarea
             rows={3}
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:!ring-blue-500"
             placeholder="Enter any specific attractions or activities you don't want to miss..."
             value={preferences.mustSeeAttractions}
-            onChange={(e) => setPreferences({ ...preferences, mustSeeAttractions: e.target.value })}
+            onChange={(e) =>
+              setPreferences({
+                ...preferences,
+                mustSeeAttractions: e.target.value,
+              })
+            }
           />
         </div>
       </div>
@@ -221,10 +260,12 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
               required
               className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               value={preferences.dates.start}
-              onChange={(e) => setPreferences({
-                ...preferences,
-                dates: { ...preferences.dates, start: e.target.value }
-              })}
+              onChange={(e) =>
+                setPreferences({
+                  ...preferences,
+                  dates: { ...preferences.dates, start: e.target.value },
+                })
+              }
             />
           </div>
         </div>
@@ -241,10 +282,12 @@ export function PreferenceForm({ onSubmit, initialData }: PreferenceFormProps) {
               required
               className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               value={preferences.dates.end}
-              onChange={(e) => setPreferences({
-                ...preferences,
-                dates: { ...preferences.dates, end: e.target.value }
-              })}
+              onChange={(e) =>
+                setPreferences({
+                  ...preferences,
+                  dates: { ...preferences.dates, end: e.target.value },
+                })
+              }
             />
           </div>
         </div>
